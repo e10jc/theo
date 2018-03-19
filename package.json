@@ -1,24 +1,23 @@
 {
   "name": "theo",
   "version": "1.0.0",
-  "description": "",
+  "description": "A home for theories.",
   "main": "index.js",
   "dependencies": {
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
+    "@zeit/next-typescript": "0.0.10",
+    "next": "^5.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "awesome-typescript-loader": "^4.0.1",
-    "source-map-loader": "^0.2.3",
     "typescript": "^2.7.2",
-    "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12"
+    "webpack": "^4.1.1"
   },
   "scripts": {
-    "webpack": "webpack"
+    "dev": "next"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Ethan Jon",
+  "license": "UNLICENSED"
 }
