@@ -4,9 +4,6 @@
   "description": "A home for theories.",
   "main": "index.js",
   "dependencies": {
-    "@types/react": "^16.0.40",
-    "@types/react-dom": "^16.0.4",
-    "@zeit/next-typescript": "0.0.10",
     "knex": "^0.14.4",
     "mysql2": "^1.5.3",
     "next": "^5.0.0",
@@ -15,11 +12,18 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
+    "@types/react": "^16.0.40",
+    "@types/react-dom": "^16.0.4",
+    "@zeit/next-typescript": "0.0.10",
+    "nodemon": "^1.17.2",
+    "ts-node": "^5.0.1",
     "typescript": "^2.7.2",
     "webpack": "^4.1.1"
   },
   "scripts": {
-    "dev": "next"
+    "dev": "nodemon server/index.ts",
+    "build": "next build && tsc --project tsconfig.server.json",
+    "start": "node dist/server/index.js"
   },
   "author": "Ethan Jon",
   "license": "UNLICENSED"
