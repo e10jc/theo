@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "A home for theories.",
   "main": "dist/server/index.js",
+  "author": "Ethan Jon",
+  "license": "UNLICENSED",
   "dependencies": {
     "knex": "^0.14.4",
     "koa": "^2.5.0",
@@ -14,19 +16,35 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
+    "@types/jest": "^22.2.2",
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
     "@zeit/next-typescript": "0.0.10",
+    "jest": "^22.4.3",
     "nodemon": "^1.17.2",
+    "ts-jest": "^22.4.2",
     "ts-node": "^5.0.1",
     "typescript": "^2.7.2",
     "webpack": "^4.1.1"
   },
   "scripts": {
+    "test": "jest",
     "dev": "nodemon server/index.ts",
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "node dist/server/index.js"
   },
-  "author": "Ethan Jon",
-  "license": "UNLICENSED"
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
 }
