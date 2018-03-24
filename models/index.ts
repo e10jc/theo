@@ -1,7 +1,7 @@
-import Knex from 'knex'
+import * as Knex from 'knex'
 import {Model} from 'objection'
 
-import knexfile from '../knexfile'
+import * as knexfile from '../knexfile'
 import {defineTheory} from './theory'
 
 const knex = Knex(knexfile[process.env.NODE_ENV])

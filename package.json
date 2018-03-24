@@ -20,6 +20,7 @@
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
     "@zeit/next-typescript": "0.0.10",
+    "cross-env": "^5.1.4",
     "jest": "^22.4.3",
     "knex-migrate": "^1.5.1",
     "nodemon": "^1.17.2",
@@ -30,7 +31,7 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "nodemon server/index.ts",
+    "dev": "cross-env NODE_ENV=development nodemon server/index.ts",
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "node dist/server/index.js"
   },
