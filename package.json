@@ -21,6 +21,7 @@
     "@types/react-dom": "^16.0.4",
     "@zeit/next-typescript": "0.0.10",
     "jest": "^22.4.3",
+    "knex-migrate": "^1.5.1",
     "nodemon": "^1.17.2",
     "ts-jest": "^22.4.2",
     "ts-node": "^5.0.1",
@@ -45,6 +46,7 @@
       "jsx",
       "json",
       "node"
-    ]
+    ],
+    "globalSetup": "<rootDir>/jest-setup.js"
   }
 }
