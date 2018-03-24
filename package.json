@@ -2,9 +2,11 @@
   "name": "theo",
   "version": "1.0.0",
   "description": "A home for theories.",
-  "main": "index.js",
+  "main": "dist/server/index.js",
   "dependencies": {
     "knex": "^0.14.4",
+    "koa": "^2.5.0",
+    "koa-router": "^7.4.0",
     "mysql2": "^1.5.3",
     "next": "^5.0.0",
     "objection": "^1.0.0",
