@@ -1,6 +1,6 @@
 import {Theory} from '../../models'
 
-test('it works', async () => {
+test('creates a model', async () => {
   const theory = await Theory.query().insertGraph({
     title: 'The title'
   })

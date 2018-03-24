@@ -2,16 +2,20 @@
   "name": "theo",
   "version": "1.0.0",
   "description": "A home for theories.",
-  "main": "dist/server/index.js",
+  "main": ".server/server/index.js",
   "author": "Ethan Jon",
   "license": "UNLICENSED",
   "dependencies": {
+    "apollo-server-koa": "^1.3.2",
+    "graphql": "^0.13.2",
     "knex": "^0.14.4",
     "koa": "^2.5.0",
+    "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.4.0",
     "mysql2": "^1.5.3",
     "next": "^5.0.0",
     "objection": "^1.0.0",
+    "objection-graphql": "^0.3.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
@@ -33,7 +37,7 @@
     "test": "jest",
     "dev": "cross-env NODE_ENV=development nodemon server/index.ts",
     "build": "next build && tsc --project tsconfig.server.json",
-    "start": "node dist/server/index.js"
+    "start": "cross-env NODE_ENV=development node .server/server/index.js"
   },
   "jest": {
     "transform": {
