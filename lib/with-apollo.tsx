@@ -39,7 +39,7 @@ export default ComposedComponent => (
         }
       )
 
-      if (!isNode) {
+      if (isNode) {
         Head.rewind()
       }
 
