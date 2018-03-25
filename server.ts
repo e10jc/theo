@@ -6,7 +6,7 @@ import * as Router from 'koa-router'
 import * as Next from 'next'
 import {builder} from 'objection-graphql'
 
-import * as Models from '../models'
+import * as Models from './models'
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'

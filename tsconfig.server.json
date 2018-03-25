@@ -5,5 +5,5 @@
     "outDir": ".server",
     "sourceMap": false
   },
-  "include": ["server/**/*.ts"]
+  "include": ["server.ts"]
 }

@@ -2,7 +2,7 @@
   "name": "theo",
   "version": "1.0.0",
   "description": "A home for theories.",
-  "main": ".server/server/index.js",
+  "main": ".server/server.js",
   "author": "Ethan Jon",
   "license": "UNLICENSED",
   "dependencies": {
@@ -41,9 +41,9 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "cross-env NODE_ENV=development nodemon server/index.ts",
+    "dev": "cross-env NODE_ENV=development nodemon server.ts",
     "build": "next build && tsc --project tsconfig.server.json",
-    "start": "cross-env NODE_ENV=development node .server/server/index.js"
+    "start": "cross-env NODE_ENV=development node .server/server.js"
   },
   "jest": {
     "transform": {
