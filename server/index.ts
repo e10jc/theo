@@ -1,5 +1,6 @@
 import {graphqlKoa, graphiqlKoa} from 'apollo-server-koa'
 import * as Koa from 'koa'
+import * as Favicon from 'koa-favicon'
 import * as BodyParser from 'koa-bodyparser'
 import * as Router from 'koa-router'
 import * as Next from 'next'
@@ -21,9 +22,16 @@ app.prepare()
   const server = new Koa()
   const router = new Router()
 
+  server.use(Favicon(__dirname + '/public/favicon.ico'))
+
   router.post('/graphql', BodyParser(), graphqlKoa({schema}))
   router.get('/graphql', graphqlKoa({schema}))
   router.get('/graphiql', graphiqlKoa({endpointURL: '/graphql'}))
+  
+  router.get('/:slug', async ctx => {
+    await app.render(ctx.req, ctx.res, '/theory', Object.assign({}, ctx.params, ctx.query))
+    ctx.respond = false
+  })
 
   router.get('*', async ctx => {
     await handle(ctx.req, ctx.res)
