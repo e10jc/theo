@@ -9,5 +9,6 @@ const createLocalConfig = ({database}) => ({
 
 module.exports = {
   development: createLocalConfig({database: 'theo'}),
-  test: createLocalConfig({database: 'theo_test'})
+  test: createLocalConfig({database: 'theo_test'}),
+  production: createLocalConfig({database: 'theo'})
 }
