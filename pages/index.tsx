@@ -1,26 +1,14 @@
-import {InMemoryCache} from 'apollo-cache-inmemory'
-import {ApolloClient} from 'apollo-client'
-import {HttpLink} from 'apollo-link-http'
 import gql from 'graphql-tag'
-import fetch from 'node-fetch'
-import {ApolloProvider, graphql} from 'react-apollo'
+import {graphql} from 'react-apollo'
 
-const client = new ApolloClient({
-  link: new HttpLink({fetch}),
-  cache: new InMemoryCache()
-})
+import Layout from '../components/layout'
+import WithApollo from '../lib/with-apollo'
 
-const Layout = ({children}) => (
+const Home = ({data}) => (
   <div>
-    {children}
-  </div>
-)
-
-const Home = ({data: {theories}}) => (
-  <div>
-    <h1>Theories</h1>
+    <h2>Theories</h2>
     <ul>
-      {theories && theories.map(theory => (
+      {data.theories && data.theories.map(theory => (
         <li key={theory.id}>
           {theory.title}
         </li>
@@ -29,7 +17,7 @@ const Home = ({data: {theories}}) => (
   </div>
 )
 
-const WrappedHome = graphql(gql`
+const HomeGQL = graphql(gql`
   {
     theories {
       id
@@ -38,10 +26,10 @@ const WrappedHome = graphql(gql`
   }
 `)(Home)
 
-export default () => (
-  <ApolloProvider client={client}>
-    <Layout>
-      <WrappedHome />
-    </Layout>
-  </ApolloProvider>
+const HomeLayout = () => (
+  <Layout>
+    <HomeGQL />
+  </Layout>
 )
+
+export default WithApollo(HomeLayout)
