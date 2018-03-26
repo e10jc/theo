@@ -7,7 +7,7 @@ export default ({children}) => (
         <a>Theo</a>
       </Link>
     </h1>
-    
+
     {children}
   </div>
 )

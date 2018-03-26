@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import {Component} from 'react'
-import {graphql, Query} from 'react-apollo'
+import {Query} from 'react-apollo'
 
 import Layout from '../components/layout'
 import WithApollo from '../lib/with-apollo'
@@ -14,28 +14,38 @@ const query = gql`
   }
 `
 
-class Theory extends Component {
-  static async getInitialProps (ctx) {
+interface Props {
+  slug?: string
+}
+
+class Theory extends Component<Props> {
+  public static async getInitialProps (ctx) {
     return {slug: ctx.query.slug}
   }
 
-  render () {
-    if (!this.props.slug) return null
+  public render () {
+    if (!this.props.slug) {
+      return null
+    }
 
     return (
       <Layout>
-        <Query 
-          query={query} 
+        <Query
+          query={query}
           variables={{id: this.props.slug}}
         >
-          {({loading, error, data}) => {
-            if (loading || error) return null
-
-            return JSON.stringify(data)
-          }}
+          {({loading, error, data}) => this.renderQuery({loading, error, data})}
         </Query>
       </Layout>
     )
+  }
+
+  private renderQuery = ({loading, error, data}) => {
+    if (loading || error) {
+      return null
+    }
+
+    return JSON.stringify(data)
   }
 }
 

@@ -1,7 +1,7 @@
-import {graphqlKoa, graphiqlKoa} from 'apollo-server-koa'
+import {graphiqlKoa, graphqlKoa} from 'apollo-server-koa'
 import * as Koa from 'koa'
-import * as Favicon from 'koa-favicon'
 import * as BodyParser from 'koa-bodyparser'
+import * as Favicon from 'koa-favicon'
 import * as Router from 'koa-router'
 import * as Next from 'next'
 import {builder} from 'objection-graphql'
@@ -27,7 +27,7 @@ app.prepare()
   router.post('/graphql', BodyParser(), graphqlKoa({schema}))
   router.get('/graphql', graphqlKoa({schema}))
   router.get('/graphiql', graphiqlKoa({endpointURL: '/graphql'}))
-  
+
   router.get('/:slug', async ctx => {
     await app.render(ctx.req, ctx.res, '/theory', Object.assign({}, ctx.params, ctx.query))
     ctx.respond = false
@@ -45,7 +45,7 @@ app.prepare()
 
   server.use(router.routes())
   server.use(router.allowedMethods())
-  
+
   server.listen(port, () => {
     console.log(`> Ready on http://localhost:${port}`)
   })

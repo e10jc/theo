@@ -9,33 +9,33 @@ import {ApolloProvider, getDataFromTree} from 'react-apollo'
 
 const initApollo = (initialState = {}) => (
   new ApolloClient({
+    cache: new InMemoryCache().restore(initialState),
     link: new HttpLink({
       fetch,
       uri: 'http://localhost:3000/graphql'
     }),
-    cache: new InMemoryCache().restore(initialState),
     ssrMode: isNode
   })
 )
 
 export default ComposedComponent => (
   class WithApollo extends Component {
-    client: ApolloClient<any>
+    public static displayName = 'WithApollo'
 
-    static displayName = 'WithApollo'
-
-    static async getInitialProps (ctx) {
-      const composedInitialProps = ComposedComponent.getInitialProps ? await ComposedComponent.getInitialProps(ctx) : {} 
+    public static async getInitialProps (ctx) {
+      const composedInitialProps = ComposedComponent.getInitialProps
+        ? await ComposedComponent.getInitialProps(ctx)
+        : {}
       const client = initApollo()
 
       await getDataFromTree(
         <ComposedComponent ctx={ctx} {...composedInitialProps} />, {
+          client,
           router: {
             asPath: ctx.asPath,
             pathname: ctx.pathname,
             query: ctx.query
-          },
-          client
+          }
         }
       )
 
@@ -53,17 +53,19 @@ export default ComposedComponent => (
       }
     }
 
+    public client: ApolloClient<any>
+
     constructor (props) {
       super(props)
       this.client = initApollo(props.serverState.apollo.data)
     }
 
-    render () {
+    public render () {
       return (
         <ApolloProvider client={this.client}>
           <ComposedComponent {...this.props} />
         </ApolloProvider>
       )
-    }  
+    }
   }
 )
