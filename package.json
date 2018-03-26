@@ -23,7 +23,8 @@
     "objection-graphql": "^0.3.1",
     "react": "^16.2.0",
     "react-apollo": "^2.1.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-portal": "^4.1.4"
   },
   "devDependencies": {
     "@types/jest": "^22.2.2",

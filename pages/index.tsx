@@ -15,7 +15,7 @@ const query = gql`
 `
 
 const renderTheory = theory => (
-  <li>
+  <li key={theory.id}>
     <Link href={`/${theory.id}`}>
       <a>{theory.title}</a>
     </Link>
