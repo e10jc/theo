@@ -46,7 +46,8 @@
     "test": "jest",
     "dev": "cross-env NODE_ENV=development nodemon server.ts",
     "build": "next build && tsc --project tsconfig.server.json",
-    "start": "cross-env NODE_ENV=production node .server/server.js"
+    "prestart": "npm run build",
+    "start": "NODE_ENV=production node .server/server.js"
   },
   "jest": {
     "transform": {
