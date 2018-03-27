@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import {Component} from 'react'
 import {Portal} from 'react-portal'
+import styled from 'styled-components'
 
 import NewTheory from './new-theory'
 
@@ -14,13 +15,19 @@ export default class Layout extends Component<any, State> {
   }
 
   public render () {
+    const Title = styled.h1`
+      a {
+        color: red;
+      }
+    `
+
     return (
     <div>
-      <h1>
+      <Title>
         <Link href='/'>
           <a>Theo</a>
         </Link>
-      </h1>
+      </Title>
 
       {this.props.children}
 
