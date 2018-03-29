@@ -13,12 +13,23 @@ const typeDefs = `
     theories: [Theory]
   }
 
+  type Mutation {
+    createTheory (title: String!): Theory
+  }
+
   schema {
+    mutation: Mutation
     query: Query
   }
 `
 
 const resolvers = {
+  Mutation: {
+    createTheory (_, {title}) {
+      return Theory.query().insertGraph({title})
+    }
+  },
+
   Query: {
     theories () {
       return Theory.query()
