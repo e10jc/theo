@@ -22,21 +22,21 @@ export default class Layout extends Component<any, State> {
     `
 
     return (
-    <div>
-      <Title>
-        <Link href='/'>
-          <a>Theo</a>
-        </Link>
-      </Title>
-
-      {this.props.children}
-
-      {this.state.isNewTheoryPortalOpen && this.renderNewTheoryPortal()}
-
       <div>
-        <button onClick={this.handleOpenNewTheoryPortalButtonClick}>New theory</button>
+        <Title>
+          <Link href='/'>
+            <a>Theo</a>
+          </Link>
+        </Title>
+
+        {this.props.children}
+
+        {this.state.isNewTheoryPortalOpen && this.renderNewTheoryPortal()}
+
+        <div>
+          <button onClick={this.handleOpenNewTheoryPortalButtonClick}>New theory</button>
+        </div>
       </div>
-    </div>
     )
   }
 

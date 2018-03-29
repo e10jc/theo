@@ -4,18 +4,13 @@ import * as BodyParser from 'koa-bodyparser'
 import * as Favicon from 'koa-favicon'
 import * as Router from 'koa-router'
 import * as Next from 'next'
-import {builder} from 'objection-graphql'
 
-import * as Models from './models'
+import schema from './graphql-schema'
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = Next({dev})
 const handle = app.getRequestHandler()
-
-const schema = builder()
-  .model(Models.Theory, {fieldName: 'theory', listFieldName: 'theories'})
-  .build()
 
 app.prepare()
 .then(() => {
