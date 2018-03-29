@@ -35,8 +35,8 @@ const resolvers = {
       return Theory.query()
     },
 
-    theory (_, args: {id: number}) {
-      return Theory.query().findById(args.id)
+    theory (_, {id}) {
+      return Theory.query().findById(id)
     },
   }
 }
