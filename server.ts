@@ -2,9 +2,7 @@ import {graphiqlKoa, graphqlKoa} from 'apollo-server-koa'
 import * as Koa from 'koa'
 import * as BodyParser from 'koa-bodyparser'
 import * as Favicon from 'koa-favicon'
-import * as Passport from 'koa-passport'
 import * as Router from 'koa-router'
-import * as Session from 'koa-session'
 import * as Next from 'next'
 
 import schema from './graphql-schema'
@@ -20,15 +18,26 @@ nextApp.prepare()
   const router = new Router()
 
   app.use(Favicon(__dirname + '/public/favicon.ico'))
-
   app.use(BodyParser())
+  app.keys = [process.env.COOKIE_SECRET]
 
-  app.keys = [process.env.SESSION_SECRET]
-  app.use(Session(app))
-  app.use(Passport.initialize())
-  app.use(Passport.session())
+  app.use(async (ctx, next) => {
+    const userId = ctx.cookies.get('id')
 
-  router.post('/graphql', graphqlKoa({schema}))
+    if (userId) {
+      console.log(`user ${userId} is logged in`)
+    }
+
+    await next()
+  })
+
+  router.post('/graphql', graphqlKoa(ctx => {
+    return {
+      context: {ctx},
+      schema,
+    }
+  }))
+
   router.get('/graphiql', graphiqlKoa({endpointURL: '/graphql'}))
 
   router.get('/:slug', async ctx => {

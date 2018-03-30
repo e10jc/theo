@@ -1,6 +1,5 @@
 import {InMemoryCache} from 'apollo-cache-inmemory'
 import {ApolloClient} from 'apollo-client'
-import {setContext} from 'apollo-link-context'
 import {HttpLink} from 'apollo-link-http'
 import * as isNode from 'detect-node'
 import Head from 'next/head'
@@ -9,24 +8,13 @@ import {Component} from 'react'
 import {ApolloProvider, getDataFromTree} from 'react-apollo'
 
 const initApollo = (initialState = {}) => {
-  const httpLink = new HttpLink({
-    fetch,
-    uri: 'http://localhost:3000/graphql'
-  })
-
-  const authLink = setContext((_, {headers}) => {
-    const token = '123'
-    return {
-      headers: {
-        ...headers,
-        authorization: token ? `Bearer ${token}` : '',
-      }
-    }
-  })
-
   return new ApolloClient({
     cache: new InMemoryCache().restore(initialState),
-    link: authLink.concat(httpLink),
+    link: new HttpLink({
+      credentials: 'same-origin',
+      fetch,
+      uri: 'http://localhost:3000/graphql'
+    }),
     ssrMode: isNode
   })
 }

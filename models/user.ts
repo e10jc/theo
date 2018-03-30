@@ -8,7 +8,7 @@ export default function ({Model}) {
 
     public static jsonSchema = {
       properties: {
-        id: {type: 'integer'}
+        id: {type: 'integer'},
       },
       required: ['email', 'password'],
       type: 'object',

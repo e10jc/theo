@@ -72,10 +72,17 @@ export default class SignUp extends Component<Props, State> {
     }
 
     return (
-      <Mutation mutation={mutation}>
+      <Mutation
+        mutation={mutation}
+        onCompleted={this.handleCompletedMutation}
+      >
         {renderForm}
       </Mutation>
     )
+  }
+
+  private handleCompletedMutation = ({createUser: user}) => {
+    console.log(user)
   }
 
   private handleFormEmailChange = e => {

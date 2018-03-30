@@ -34,8 +34,14 @@ const resolvers = {
       return Theory.query().insertGraph({title})
     },
 
-    createUser (_, {email, password}) {
-      return User.query().insertGraph({email, password})
+    async createUser (_, {email, password}, {ctx}) {
+      const user = await User.query().insertGraph({email, password})
+
+      if (user) {
+        ctx.cookies.set('id', user.id, {signed: true})
+      }
+
+      return user
     },
   },
 
