@@ -4,14 +4,17 @@ import {Portal} from 'react-portal'
 import styled from 'styled-components'
 
 import NewTheory from './new-theory'
+import SignUp from './sign-up'
 
 interface State {
-  isNewTheoryPortalOpen: boolean
+  isNewTheoryPortalOpen: boolean,
+  isSignUpPortalOpen: boolean,
 }
 
 export default class Layout extends Component<any, State> {
   public readonly state = {
-    isNewTheoryPortalOpen: false
+    isNewTheoryPortalOpen: false,
+    isSignUpPortalOpen: false,
   }
 
   public render () {
@@ -36,6 +39,12 @@ export default class Layout extends Component<any, State> {
         <div>
           <button onClick={this.handleOpenNewTheoryPortalButtonClick}>New theory</button>
         </div>
+
+        {this.state.isSignUpPortalOpen && this.renderSignUpPortal()}
+
+        <div>
+          <button onClick={this.handleOpenSignUpPortalButtonClick}>Sign up</button>
+        </div>
       </div>
     )
   }
@@ -50,11 +59,29 @@ export default class Layout extends Component<any, State> {
     )
   }
 
+  public renderSignUpPortal () {
+    return (
+      <Portal>
+        <SignUp
+          closePortal={this.handleCloseSignUpPortalButtonClick}
+        />
+      </Portal>
+    )
+  }
+
   private handleOpenNewTheoryPortalButtonClick = () => {
     this.setState({isNewTheoryPortalOpen: true})
   }
 
+  private handleOpenSignUpPortalButtonClick = () => {
+    this.setState({isSignUpPortalOpen: true})
+  }
+
   private handleCloseNewTheoryPortalButtonClick = () => {
     this.setState({isNewTheoryPortalOpen: false})
+  }
+
+  private handleCloseSignUpPortalButtonClick = () => {
+    this.setState({isSignUpPortalOpen: true})
   }
 }

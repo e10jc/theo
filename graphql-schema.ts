@@ -1,11 +1,15 @@
 import {makeExecutableSchema} from 'graphql-tools'
 
-import {Theory} from './models'
+import {Theory, User} from './models'
 
 const typeDefs = `
   type Theory {
     id: ID!
     title: String!
+  }
+
+  type User {
+    id: ID!
   }
 
   type Query {
@@ -15,6 +19,7 @@ const typeDefs = `
 
   type Mutation {
     createTheory (title: String!): Theory
+    createUser (email: String!, password: String!): User
   }
 
   schema {
@@ -27,7 +32,11 @@ const resolvers = {
   Mutation: {
     createTheory (_, {title}) {
       return Theory.query().insertGraph({title})
-    }
+    },
+
+    createUser (_, {email, password}) {
+      return User.query().insertGraph({email, password})
+    },
   },
 
   Query: {

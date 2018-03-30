@@ -1,5 +1,9 @@
 {
-  "watch": ["server/**/*.ts"],
+  "watch": [
+    "models/**/*",
+    "graphql-schema.ts",
+    "server.ts"
+  ],
   "execMap": {
     "ts": "ts-node --compilerOptions \"{\\\"module\\\":\\\"commonjs\\\"}\""
   }
