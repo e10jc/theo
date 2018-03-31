@@ -52,9 +52,7 @@ export default class Layout extends Component<any, State> {
   public renderNewTheoryPortal () {
     return (
       <Portal>
-        <NewTheory
-          closePortal={this.handleCloseNewTheoryPortalButtonClick}
-        />
+        <NewTheory closePortal={this.handleCloseNewTheoryPortalButtonClick} />
       </Portal>
     )
   }
@@ -62,9 +60,7 @@ export default class Layout extends Component<any, State> {
   public renderSignUpPortal () {
     return (
       <Portal>
-        <SignUp
-          closePortal={this.handleCloseSignUpPortalButtonClick}
-        />
+        <SignUp closePortal={this.handleCloseSignUpPortalButtonClick} />
       </Portal>
     )
   }
@@ -82,6 +78,6 @@ export default class Layout extends Component<any, State> {
   }
 
   private handleCloseSignUpPortalButtonClick = () => {
-    this.setState({isSignUpPortalOpen: true})
+    this.setState({isSignUpPortalOpen: false})
   }
 }

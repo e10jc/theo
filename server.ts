@@ -5,6 +5,7 @@ import * as Favicon from 'koa-favicon'
 import * as Router from 'koa-router'
 import * as Next from 'next'
 
+import authUser from './auth-user'
 import schema from './graphql-schema'
 
 const port = parseInt(process.env.PORT, 10) || 3000
@@ -17,21 +18,11 @@ nextApp.prepare()
   const app = new Koa()
   const router = new Router()
 
-  app.use(Favicon(__dirname + '/public/favicon.ico'))
-  app.use(BodyParser())
   app.keys = [process.env.COOKIE_SECRET]
 
-  app.use(async (ctx, next) => {
-    const userId = ctx.cookies.get('id')
+  app.use(Favicon(__dirname + '/public/favicon.ico'))
 
-    if (userId) {
-      console.log(`user ${userId} is logged in`)
-    }
-
-    await next()
-  })
-
-  router.post('/graphql', graphqlKoa(ctx => {
+  router.post('/graphql', BodyParser(), authUser, graphqlKoa(ctx => {
     return {
       context: {ctx},
       schema,
@@ -40,8 +31,13 @@ nextApp.prepare()
 
   router.get('/graphiql', graphiqlKoa({endpointURL: '/graphql'}))
 
-  router.get('/:slug', async ctx => {
+  router.get('/:slug', authUser, async ctx => {
     await nextApp.render(ctx.req, ctx.res, '/theory', Object.assign({}, ctx.params, ctx.query))
+    ctx.respond = false
+  })
+
+  router.get('/', authUser, async ctx => {
+    await nextApp.render(ctx.req, ctx.res, '/index', Object.assign({}, ctx.params, ctx.query))
     ctx.respond = false
   })
 
