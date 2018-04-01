@@ -4,6 +4,7 @@ import {Query} from 'react-apollo'
 
 import Layout from '../components/layout'
 import WithApollo from '../lib/with-apollo'
+import WithCurrentUser from '../lib/with-current-user'
 
 const query = gql`
   {
@@ -45,4 +46,4 @@ const Home = () => (
   </Layout>
 )
 
-export default WithApollo(Home)
+export default WithCurrentUser(WithApollo(Home))
